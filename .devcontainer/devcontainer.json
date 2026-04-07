@@ -1,0 +1,16 @@
+{
+  "name": "mlir-tutorial",
+  "build": {
+    "context": "..",
+    "dockerfile": "../Containerfile"
+  },
+  "remoteUser": "dev",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/mlir-tutorial,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/mlir-tutorial",
+  "mounts": [
+    "source=mlir-tutorial-bazel-cache,target=/home/dev/.cache/bazel,type=volume"
+  ],
+  "runArgs": [
+    "--security-opt=label=disable"
+  ]
+}

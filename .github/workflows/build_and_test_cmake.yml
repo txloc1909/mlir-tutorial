@@ -9,17 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/txloc1909/mlir-tutorial-dev:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pin@v4.2.2
         with:
           submodules: recursive
-      - uses: seanmiddleditch/gha-setup-ninja@master
-
-      - name: Install prerequisites
-        run: |
-          sudo apt update
-          sudo apt install -y uuid-dev
 
       - name: Cache LLVM artifact
         id: cache-llvm

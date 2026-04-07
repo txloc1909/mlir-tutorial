@@ -19,9 +19,11 @@ RUN curl -fsSL \
     -o /usr/local/bin/bazel \
     && chmod +x /usr/local/bin/bazel
 
-# Non-root user (uid=1000) for devpod/distrobox compatibility
-RUN groupadd --gid 1000 dev \
-    && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash dev
+# Non-root user (uid=1000) for devpod/distrobox compatibility.
+# ubuntu:24.04 ships an 'ubuntu' user at uid/gid 1000 — rename it instead
+# of creating a new one to avoid GID/UID conflicts.
+RUN usermod -l dev -d /home/dev -m -s /bin/bash ubuntu \
+    && groupmod -n dev ubuntu
 
 USER dev
 WORKDIR /home/dev

@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake ninja-build \
     python3 python3-pip \
     uuid-dev \
+    zlib1g-dev \
     git curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 

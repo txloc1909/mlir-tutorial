@@ -66,6 +66,7 @@ mkdir -p "$BAZEL_CACHE"
 PODMAN_ARGS=(
     run --rm -it
     --security-opt label=disable
+    --userns=keep-id
     -v "${WORKTREE_DIR}:/workspace:Z"
     -v "${BAZEL_CACHE}:/home/dev/.cache/bazel:Z"
     -w /workspace

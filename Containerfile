@@ -27,4 +27,7 @@ RUN usermod -l dev -d /home/dev -m -s /bin/bash ubuntu \
     && groupmod -n dev ubuntu
 
 USER dev
+# Pre-create cache dirs as dev-owned so volume mounts don't shadow them
+# with root-owned parent directories (podman creates mount point parents as root).
+RUN mkdir -p /home/dev/.cache/bazel /home/dev/.cache/bazelisk
 WORKDIR /home/dev

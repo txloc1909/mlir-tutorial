@@ -25,6 +25,6 @@ jobs:
       - name: Build and push image
         run: |
           IMAGE="ghcr.io/${{ github.repository_owner }}/mlir-tutorial-dev"
-          docker build -t "${IMAGE}:latest" -t "${IMAGE}:sha-${{ github.sha }}" .
+          docker build -f Containerfile -t "${IMAGE}:latest" -t "${IMAGE}:sha-${{ github.sha }}" .
           docker push "${IMAGE}:latest"
           docker push "${IMAGE}:sha-${{ github.sha }}"
